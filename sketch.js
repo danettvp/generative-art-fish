@@ -1,63 +1,29 @@
-// https://www.youtube.com/watch?v=04omUmiwCAE&lc=UgwXpnzmsjM3M3OdGFJ4AaABAg
-
-let r = 40;    // Radius of starting cirlce
-let dr = 0.1;    // Amount r increases each rotation
-let th = 0;    // Starting rotation
-let dth = 0.01; // Rotation each incremend of for loop
+let t = 0;
 
 function setup() {
   createCanvas(600, 400);
+  stroke(255);
+  noFill();
 }
-
 
 function draw() {
-  background(281, 261, 249);
-  translate(width/2, height/2)
-  
-  noFill()
-  strokeWeight(0.1)
-  
-  beginShape()
-  for(let i = 0; i < 101700; i++){
-    r += (dr + i/100000) * dth/(2*PI);
-    th += dth;
-    
-    // Position of spiral
-    let x = r*cos(th);
-    let y = r*sin(th);
-    
-    // let m = sqrt(x**2 + y**2); // Magnitude
-    
-    // Angle of noise field vector
-    let d = 100;
-    let phi = noise(x/d,y/d) * (2*PI);
-    
-    // Magnitude of noise field vector
-    let v = ((r-40)**1.5)/10;
-    
-    // dr += 0.01;
-    
-    vertex(
-      x + v*cos(phi) + r*cos(i/10000)*i/1000000, 
-      y + v*sin(phi) + r*sin(i/10000)*i/1000000
-    )
+  background(20);
+  translate(width/2, height/2);
+
+  strokeWeight(1);
+
+  beginShape();
+  for (let i = 0; i < 400; i++) {
+
+    let a = i * 0.05;
+    let r = 120 * sin(a * 0.5);
+
+    let x = r * cos(a + t);
+    let y = r * sin(a);
+
+    vertex(x, y);
   }
-  endShape()
-  
-  // console.log(exp(200))
-  
-  noLoop()
-  
-}
+  endShape();
 
-// function mousePressed(){
-//   r = 40;
-//   th = 0;
-//   loop();
-// }
-
-function mouseReleased(){
-  r = 40;
-  th = 0;
-  loop();
+  t += 0.01;
 }
